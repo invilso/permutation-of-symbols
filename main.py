@@ -39,9 +39,6 @@ class Permuter:
         out2 = re.sub('\n ', '\n', out2) #fix \n + space
         return out2
 
-s = '''Воторй пнукт не свсеом пянол.
-
-Рвзае за квноямои не сядeлт?
-P.S. Вы заелмити что эотт тсeкт вы сгомли без побрелм пчортиать? Нжнуо вегсо чобты првеая и плодесняя бквуы блыи на соивх мстеах.'''
+s = '''Hi. Have you noticed that you are calmly reading such a text without straining at all?'''
 p = Permuter()
 print(p.permuteString(s))
