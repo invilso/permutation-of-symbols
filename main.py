@@ -3,9 +3,6 @@ import re
 
 
 class Permuter:
-    def getLines(self, string) -> list:
-        return re.split('\n', string)
-
     def getWords(self, string) -> list:
         return re.split(r'[\s|,!\.?]', string)
 
@@ -20,7 +17,7 @@ class Permuter:
             return word
 
     def saveSybols(self, string) -> list:
-        symbs = [',', '!', '.', "?"]
+        symbs = [',', '!', '.', "?", '\n']
         out = []
         for key, symb in enumerate(string):
             if symb in symbs:
@@ -30,12 +27,8 @@ class Permuter:
     def permuteString(self, string: str) -> str:
         out = ''
         saved = self.saveSybols(string)
-        lines = self.getLines(string)
-        for key, line in enumerate(lines):
-            for word in self.getWords(line):
-                out = out + self.permuteWord(word) + ' '
-            if key != len(lines):
-                out = out + '\n'
+        for word in self.getWords(string):
+            out = out + self.permuteWord(word) + ' '
         out = list(out)
         for i, s in enumerate(saved, 0):
             out.insert(s['key']+i, s['symb']) #I add "i" every time because the length of the string changes.
@@ -43,8 +36,12 @@ class Permuter:
         for s in out:
             out2 = out2 + s
         out2 = re.sub('  ', ' ', out2) #fix dubble spaces
+        out2 = re.sub('\n ', '\n', out2) #fix \n + space
         return out2
 
-s = '''Hi. Have you noticed that you are calmly reading such a text without straining at all?'''
+s = '''Воторй пнукт не свсеом пянол.
+
+Рвзае за квноямои не сядeлт?
+P.S. Вы заелмити что эотт тсeкт вы сгомли без побрелм пчортиать? Нжнуо вегсо чобты првеая и плодесняя бквуы блыи на соивх мстеах.'''
 p = Permuter()
 print(p.permuteString(s))
